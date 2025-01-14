@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from .models import AnalyzePRRequest
+from .models import Task
 
 
-class AnalyzerPrRequestSerialzier(serializers.ModelSerializer):
+class TaskSerialzier(serializers.ModelSerializer):
 
     class Meta:
-        model = AnalyzePRRequest
-        fields = ['github_url','pr_number','github_token']
+        model = Task
+        fields = ['task_id','github_url','pr_number','github_token']
+        read_only_fields = ['task_id']

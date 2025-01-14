@@ -1,6 +1,8 @@
+from uuid import uuid4
+
 import requests
 import base64
-
+from ai_agent import analyze_content_with_llm
 
 def extract_content_from_pr(url,pr_no,token=None):
     headers = {'Authorization':token} if token else {}
@@ -8,9 +10,25 @@ def extract_content_from_pr(url,pr_no,token=None):
     owner = url.split('/')[-2]
     pr_response = requests.get(f"https://api.github.com/repos/{owner}/{project}/pulls/{pr_no}/files",headers=headers)
     pr_response.raise_for_status()
-    filename = pr_response.json()[0].get('filename')
-    content_response = requests.get(f"https://api.github.com/repos/{owner}/{project}/contents/{filename}",headers=headers)
-    content_response.raise_for_status()
-    content_base64  = content_response.json().get('content')
-    content = base64.b64decode(content_base64).decode()
-    return content
+    pr_repsonses=pr_response.json()
+    content_list=[]
+    for pr_response in pr_repsonses:
+        filename = pr_response.json().get('filename')
+        content_response = requests.get(f"https://api.github.com/repos/{owner}/{project}/contents/{filename}",headers=headers)
+        content_response.raise_for_status()
+        content_base64  = content_response.json().get('content')
+        content = base64.b64decode(content_base64).decode()
+        content_list.append(content)
+    return content_list
+
+
+def analyze_pr(url,pr_no,task_id,token=None):
+    response_list=[]
+    try:
+        content_list=extract_content_from_pr(url,pr_no,token)
+        for content in content_list:
+            results=analyze_pr(content)
+            response_list.append(results)
+        return {'task_id':task_id,'results':response_list}
+    except Exception as e:
+        return {'task_id':task_id,'results':[]}

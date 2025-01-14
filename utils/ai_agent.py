@@ -37,3 +37,4 @@ def analyze_content_with_llm(file_content):
 
     ],temperature=1,top_p=1)
     print(completion.choices[0].message.content)
+    return completion
