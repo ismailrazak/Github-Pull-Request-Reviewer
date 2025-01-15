@@ -1,3 +1,3 @@
-web: celery -A tbc worker --loglevel=info & python manage.py migrate && gunicorn tbc.wsgi  --bind 0.0.0.0:$PORT
+web: celery -A main worker --loglevel=info & python manage.py migrate && gunicorn main.wsgi  --bind 0.0.0.0:$PORT
 
 
