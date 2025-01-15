@@ -33,8 +33,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = config(
 SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD", cast=bool, default=True)
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", cast=bool, default=True)
 CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE ", cast=bool, default=True)
-CSRF_TRUSTED_ORIGINS = ["https://web-production-f181e.up.railway.app/*"]
-ALLOWED_HOSTS = ["web-production-f181e.up.railway.app", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://web-production-7f13.up.railway.app/*"]
+ALLOWED_HOSTS = ["web-production-7f13.up.railway.app", "127.0.0.1"]
 
 
 # Application definition
