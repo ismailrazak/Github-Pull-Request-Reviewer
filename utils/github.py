@@ -8,7 +8,7 @@ from .ai_agent import analyze_content_with_llm
 
 def extract_content_from_pr(url, pr_no, token=None):
     try:
-        headers = {"Authorization":token} if token else {}
+        headers = {"Authorization": token} if token else {}
         project = url.split("/")[-1]
         owner = url.split("/")[-2]
         pr_response = requests.get(

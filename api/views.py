@@ -13,7 +13,7 @@ class StartTaskView(APIView):
         try:
             url = request.data["github_url"]
             pr_no = request.data["pr_number"]
-            token = request.data.get("github_token",None)
+            token = request.data.get("github_token", None)
             task_id = str(uuid4())
             serializer = StartTaskSerializer(
                 data={"url": url, "pr_no": pr_no, "token": token, "task_id": task_id}
@@ -40,3 +40,8 @@ class CheckTaskView(APIView):
         return Response(
             {"task_id": task_id, "status": result.state, "result": result.result}
         )
+
+
+# todo : add celery adn redis to env
+# todo : fix json response of llm
+# todo : add read me
