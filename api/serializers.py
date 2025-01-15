@@ -1,0 +1,7 @@
+from rest_framework import serializers
+
+class StartTaskSerializer(serializers.Serializer):
+    url = serializers.URLField()
+    pr_no =  serializers.IntegerField()
+    token = serializers.CharField(max_length=400)
+    task_id = serializers.UUIDField()

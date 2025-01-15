@@ -30,9 +30,13 @@ def analyze_pr(url,pr_no,task_id,token=None):
     response_list=[]
     try:
         content_list=extract_content_from_pr(url,pr_no,token)
+        if not content_list:
+            return {'HTTP Error':'There was a issue in the request.'}
         for content in content_list:
             results=analyze_content_with_llm(content)
+            if not results:
+                return {'error':'Files are too large too process for LLM.'}
             response_list.append(results)
         return {'task_id':task_id,'results':response_list}
     except Exception as e:
-        return e
+        return  {'task_id':task_id,'results':response_list}
