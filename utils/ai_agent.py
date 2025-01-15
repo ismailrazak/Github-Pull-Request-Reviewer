@@ -1,6 +1,6 @@
 from groq import Groq
 from decouple import config
-
+from .prompts import system_prompt
 
 def analyze_content_with_llm(file_content):
     prompt = f'''
@@ -11,7 +11,7 @@ def analyze_content_with_llm(file_content):
 
     Content:{file_content}
     
-    Return a detailed JSON Response with the structure:
+ Return a detailed JSON Response with the following structure:
     {{
         'issues':[
         {{
@@ -24,11 +24,14 @@ def analyze_content_with_llm(file_content):
         ]
         
     }}
-    
     '''
 
     client = Groq(api_key=config("GROQ_KEY"))
     completion =client.chat.completions.create(model='llama3-8b-8192',messages=[
+        {
+            'role':'system','content':system_prompt
+        },
+
         {
             'role':'user',
             'content':prompt,
@@ -36,5 +39,4 @@ def analyze_content_with_llm(file_content):
         }
 
     ],temperature=1,top_p=1)
-    print(completion.choices[0].message.content)
-    return completion
+    return completion.choices[0].message.content
