@@ -23,6 +23,13 @@ To start a task:
 ```
 /api/start_task/
 ```
+Send :
+```json
+{
+    "github_url": "https://github.com/django/django",
+    "pr_number": 19044
+}
+```
 To check the status of the task:
 ```
 /api/check_task/<task_id>
@@ -32,7 +39,7 @@ To check the status of the task:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ismailrazak/Collab-Task-api.git
+   git clone https://github.com/ismailrazak/Github-Pull-Request-Reviewer-API.git
    ```
 
 2. Install dependencies:
