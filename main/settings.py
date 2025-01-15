@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from email.policy import default
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,13 +19,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-kc=gr$@qq_hge4=an(&w!g2+mv==hh=-7^*)-9oq!uy2)!)6$0"
+# deployment checklist
+DEBUG=config("DEBUG",cast=bool,default=False)
+SECRET_KEY = config("SECRET_KEY")
+SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT",cast=bool,default=False)
+SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS",default=2592000)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = config("SECURE_HSTS_INCLUDE_SUBDOMAINS",cast=bool,default=True)
+SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD",cast=bool,default=True)
+SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE",cast=bool,default=True)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE ',cast=bool,default=True)
+CSRF_TRUSTED_ORIGINS = ["https://web-production-f181e.up.railway.app/*"]
+ALLOWED_HOSTS = ["web-production-f181e.up.railway.app", "127.0.0.1"]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
