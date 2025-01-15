@@ -43,5 +43,3 @@ class CheckTaskView(APIView):
 
 
 # todo : add celery adn redis to env
-# todo : fix json response of llm
-# todo : add read me

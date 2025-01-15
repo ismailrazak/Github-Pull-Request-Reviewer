@@ -19,10 +19,8 @@ def analyze_content_with_llm(file_content):
         'line':'<line_number>',
         'description':'<description>',
         'suggestion':'<suggestion>'
-        
         }}
         ]
-        
     }}
     
     """

@@ -1,4 +1,5 @@
 import base64
+import json
 from uuid import uuid4
 
 import requests
@@ -43,6 +44,7 @@ def analyze_pr(url, pr_no, task_id, token=None):
             results = analyze_content_with_llm(content)
             if not results:
                 return {"error": "Files are too large too process for LLM."}
+            results = json.loads(results)
             response_list.append(results)
         return {"task_id": task_id, "results": response_list}
     except Exception as e:
