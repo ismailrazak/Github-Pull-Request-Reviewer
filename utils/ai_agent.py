@@ -1,9 +1,11 @@
-from groq import Groq
 from decouple import config
+from groq import Groq
+
 from .prompts import system_prompt
 
+
 def analyze_content_with_llm(file_content):
-    prompt = f'''
+    prompt = f"""
     Analyze the following code for:
     - Code style and formatting issues
     - Potential bugs or errors
@@ -15,7 +17,7 @@ def analyze_content_with_llm(file_content):
     {{
         'issues':[
         {{
-        'type':"<style|bug|performace_issues|best_practices>",
+        'type':"<style|bug|performance_issues|best_practices>",
         'line':'<line_number>',
         'description':'<description>',
         'suggestion':'<suggestion>'
@@ -24,22 +26,22 @@ def analyze_content_with_llm(file_content):
         ]
         
     }}
-    '''
+    """
 
     client = Groq(api_key=config("GROQ_KEY"))
     try:
-        completion =client.chat.completions.create(model='llama3-8b-8192',messages=[
-            {
-                'role':'system','content':system_prompt
-            },
-
-            {
-                'role':'user',
-                'content':prompt,
-
-            }
-
-        ],temperature=1,top_p=1)
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            temperature=1,
+            top_p=1,
+        )
         return completion.choices[0].message.content
     except Exception as e:
         return None

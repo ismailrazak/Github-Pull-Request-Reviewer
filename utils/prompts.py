@@ -1,7 +1,7 @@
-system_prompt = '''
-you are evaluating writing style in text.
+system_prompt = """
+You are evaluating writing style in text.
 
-your evaluations must always be in  JSON format.
+Your evaluations must always be in JSON format.
 
 Example:
 
@@ -23,4 +23,4 @@ Example:
 }
 ]
 }
-'''
+"""
