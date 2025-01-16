@@ -1,5 +1,8 @@
 # GitHub PR Review Checker
 
+## Live Link:
+https://github-pull-request-reviewer-api.onrender.com/api/start_task/
+
 This is a RESTful API service built with Django REST Framework (DRF) that integrates Meta's LLM, Llama 3, to analyze the contents of a GitHub pull request (PR). The application leverages Celery for asynchronous task management and Redis as a database backend.
 
 ## Features
@@ -29,7 +32,28 @@ Send :
     "github_url": "https://github.com/django/django",
     "pr_number": 19044
 }
+
+
 ```
+### Note regarding github tokens:
+
+To access your own private repos or if 'there was an error with your request.' error occurs when checking the status of the task , Then you must provide your own github private token.
+To generate your Github personal access token -
+
+Visit the https://github.com/settings/personal-access-tokens section on Github.
+- Click on Generate new token
+- Fill in the token name, expiry and resource owner
+- Carefully review and grant the necessary fine grained permissions to your token
+- Use the generated token here
+```json
+{
+    "github_url": "https://github.com/django/django",
+    "pr_number": 19020,
+    "github_token":"<your token here>"
+}
+
+```
+
 To check the status of the task:
 ```
 /api/check_task/<task_id>
