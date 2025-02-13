@@ -48,7 +48,7 @@ def analyze_pr(url, pr_no, task_id, token=None):
                 return {"error": "Files are too large too process for LLM."}
             results = json.loads(results)
             response_list.append(results)
-        return {"task_id": task_id, "results": response_list}
+        return {"task_id": task_id, "final_results": response_list}
     except Exception as e:
         return {"task_id": task_id, "error": e}
 
