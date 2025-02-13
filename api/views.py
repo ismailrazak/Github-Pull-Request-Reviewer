@@ -40,6 +40,3 @@ class CheckTaskView(APIView):
         return Response(
             {"task_id": task_id, "status": result.state, "result": result.result}
         )
-
-
-# todo : add celery adn redis to env
