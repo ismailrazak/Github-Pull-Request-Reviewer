@@ -1,7 +1,7 @@
 # GitHub PR Review Checker
 
 ## Live Link:
-https://github-pull-request-reviewer-api.onrender.com/api/start_task/
+https://github-pull-request-reviewer.onrender.com/api/start_task/
 
 This is a RESTful API service built with Django REST Framework (DRF) that integrates Meta's LLM, Llama 3, to analyze the contents of a GitHub pull request (PR). The application leverages Celery for asynchronous task management and Redis as a database backend.
 

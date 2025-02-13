@@ -33,8 +33,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = config(
 SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD", cast=bool, default=True)
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", cast=bool, default=True)
 CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE ", cast=bool, default=True)
-CSRF_TRUSTED_ORIGINS = ["https://github-pull-request-reviewer-api.onrender.com/*"]
-ALLOWED_HOSTS = ["github-pull-request-reviewer-api.onrender.com", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://github-pull-request-reviewer.onrender.com/*"]
+ALLOWED_HOSTS = ["github-pull-request-reviewer.onrender.com", "127.0.0.1"]
 
 
 # Application definition
@@ -144,5 +144,13 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "10/hour",
     },
 }
