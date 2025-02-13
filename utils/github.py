@@ -50,7 +50,7 @@ def analyze_pr(url, pr_no, task_id, token=None):
             response_list.append(results)
         return {"task_id": task_id, "final_results": response_list}
     except Exception as e:
-        return {"task_id": task_id, "error": "e"}
+        return {"task_id": task_id, "error": f"{e}"}
 
 
 # todo
